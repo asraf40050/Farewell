@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Farewell Fest 2026</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#0b0f1a;
+color:white;
+}
+
+header{
+height:100vh;
+background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
+url("https://images.unsplash.com/photo-1492684223066-81342ee5ff30");
+
+background-size:cover;
+text-align:center;
+padding-top:200px;
+}
+
+h1{
+font-size:70px;
+margin:0;
+}
+
+button{
+
+padding:15px 30px;
+border:none;
+background:#ff3c78;
+color:white;
+font-size:18px;
+border-radius:8px;
+cursor:pointer;
+
+}
+
+section{
+
+padding:50px;
+text-align:center;
+
+}
+
+.card{
+
+background:#12192b;
+padding:20px;
+margin:15px;
+border-radius:10px;
+display:inline-block;
+width:250px;
+
+}
+
+input,select{
+
+width:80%;
+padding:12px;
+margin:10px;
+border-radius:6px;
+border:none;
+
+}
+
+form{
+
+background:#12192b;
+padding:30px;
+border-radius:10px;
+width:400px;
+margin:auto;
+
+}
+
+table{
+
+width:90%;
+margin:auto;
+margin-top:30px;
+border-collapse:collapse;
+
+}
+
+th,td{
+
+border:1px solid gray;
+padding:10px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Farewell Fest</h1>
+
+<h2>The Final Chapter 2026</h2>
+
+<button onclick="scrollToForm()">
+Participate Now
+</button>
+
+</header>
+
+<section>
+
+<h2>Events</h2>
+
+<div class="card">
+<h3>Dance</h3>
+<p>Solo and group dance competition</p>
+</div>
+
+<div class="card">
+<h3>Singing</h3>
+<p>Show your musical talent</p>
+</div>
+
+<div class="card">
+<h3>Fashion Show</h3>
+<p>Ramp walk competition</p>
+</div>
+
+<div class="card">
+<h3>Drama</h3>
+<p>Acting performances</p>
+</div>
+
+</section>
+
+<section id="register">
+
+<h2>Register Here</h2>
+
+<form id="form">
+
+<input type="text"
+placeholder="Name"
+id="name"
+required>
+
+<input type="text"
+placeholder="Branch"
+id="branch"
+required>
+
+<input type="email"
+placeholder="Email"
+id="email"
+required>
+
+<select id="event">
+
+<option>Dance</option>
+
+<option>Singing</option>
+
+<option>Fashion Show</option>
+
+<option>Drama</option>
+
+</select>
+
+<button type="submit">
+
+Register
+
+</button>
+
+</form>
+
+</section>
+
+<section>
+
+<h2>Participants Data (Admin)</h2>
+
+<table id="table">
+
+<tr>
+
+<th>Name</th>
+
+<th>Branch</th>
+
+<th>Email</th>
+
+<th>Event</th>
+
+</tr>
+
+</table>
+
+</section>
+
+<script>
+
+function scrollToForm(){
+
+document.getElementById("register")
+.scrollIntoView();
+
+}
+
+let form=
+document.getElementById("form");
+
+let table=
+document.getElementById("table");
+
+form.addEventListener("submit",
+
+function(e){
+
+e.preventDefault();
+
+let data={
+
+name:name.value,
+
+branch:branch.value,
+
+email:email.value,
+
+event:event.value
+
+};
+
+let users=
+
+JSON.parse(localStorage
+.getItem("users"))
+
+|| [];
+
+users.push(data);
+
+localStorage.setItem(
+"users",
+
+JSON.stringify(users)
+
+);
+
+addData(data);
+
+form.reset();
+
+alert("Registered");
+
+});
+
+function addData(data){
+
+let row=
+table.insertRow();
+
+row.insertCell(0)
+.innerHTML=data.name;
+
+row.insertCell(1)
+.innerHTML=data.branch;
+
+row.insertCell(2)
+.innerHTML=data.email;
+
+row.insertCell(3)
+.innerHTML=data.event;
+
+}
+
+window.onload=function(){
+
+let users=
+
+JSON.parse(localStorage
+.getItem("users"))
+
+|| [];
+
+users.forEach(addData);
+
+}
+
+</script>
+
+</body>
+</html>
